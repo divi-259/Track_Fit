@@ -1,0 +1,565 @@
+/* General body styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #181D27; /* Dark navy background */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #D0DB97; /* Light olive text */
+}
+
+/* Container for layout */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Heading styles */
+h1, h2, h3 {
+  color: #D0DB97; /* Light olive headings */
+}
+
+/* Section styling */
+section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #254D32; /* Deep green background for sections */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #D0DB97; /* Light olive text */
+}
+
+/* Header styling */
+header {
+  background-image: url('/img/bgimage2.jpg');  /* Replace with your image path */
+  background-size: cover;  /* Ensures the image covers the whole section */
+  background-position: center;  /* Centers the image */
+  background-color: #3A7D44; /* Muted green background for header */
+  color: #ffffff; /* Light olive text */
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Navigation styling */
+header nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+header nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  color: #D0DB97; /* Light olive links */
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: #0d3212;
+}
+
+header nav ul li a:hover {
+  color: #69B578; /* Vibrant green hover effect */
+}
+
+/* Main content area */
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Footer styling */
+footer {
+  clear: both;
+  background-color: #3A7D44; /* Muted green background for footer */
+  color: #D0DB97; /* Light olive text */
+  text-align: center;
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Button styling */
+button {
+  background-color: #69B578; /* Vibrant green buttons */
+  color: #181D27; /* Dark navy text */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3A7D44; /* Muted green on hover */
+}
+
+/* Links */
+a {
+  color: #69B578; /* Vibrant green links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* Hero section */
+#home {
+  background-image: url('/img/bgdark.jpg');  /* Replace with your image path */
+  background-size: cover;  /* Ensures the image covers the whole section */
+  background-position: center;  /* Centers the image */
+  background-color: #254D32; /* Deep green background */
+  color: #D0DB97; /* Light olive text */
+  padding: 60px 20px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#home h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #D0DB97; /* Light olive headings */
+}
+
+#home p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #D0DB97; /* Light olive text */
+}
+
+#home .cta-button {
+  background-color: #69B578; /* Vibrant green button */
+  color: #181D27; /* Dark navy text */
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#home .cta-button:hover {
+  background-color: #3A7D44; /* Muted green button hover */
+}
+
+/* Profile Section */
+#profile {
+  background-image: url('/img/bgdark1.jpg');  /* Replace with your image path */
+  background-size: cover;  /* Ensures the image covers the whole section */
+  background-position: center;  /* Centers the image */
+  background-color: #3A7D44; /* Muted green background */
+  margin: 2rem;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#profile form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+#profile label {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #D0DB97; /* Light olive text */
+}
+
+#profile input,
+#profile select,
+#profile textarea {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #69B578; /* Vibrant green border */
+}
+
+#profile input:focus,
+#profile select:focus,
+#profile textarea:focus {
+  border-color: #69B578; /* Vibrant green focus border */
+  outline: none;
+}
+
+#profile button {
+  margin-top: 1rem;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #69B578; /* Vibrant green background */
+  color: #181D27; /* Dark navy text */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#profile button:hover {
+  background-color: #3A7D44; /* Muted green on hover */
+}
+
+.hidden {
+  display: none;
+}
+
+#profile-display {
+  max-width: 400px;
+  margin: auto;
+  padding: 1rem;
+  background-color: #254D32; /* Deep green background */
+  border: 1px solid #69B578; /* Vibrant green border */
+  border-radius: 4px;
+  text-align: left;
+}
+
+#profile-display h3 {
+  color: #D0DB97; /* Light olive headings */
+}
+
+#profile-display p {
+  color: #D0DB97; /* Light olive text */
+}
+ 
+
+/* Workout Tracker Section */
+#workout {
+  background-image: url('/img/dumbells.jpg');  /* Replace with your image path */
+  background-size: cover;  /* Ensures the image covers the whole section */
+  background-position: center;  /* Centers the image */
+  background-color: #3A7D44; /* Muted green background */
+  margin: 2rem;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#workout form {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px; /* Increased width to accommodate horizontal layout */
+  margin: auto;
+}
+
+#workout label {
+  margin-top: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  padding: 5px 10px;
+  background-color: #010301;
+  color: #D0DB97; /* Light olive text */
+}
+
+#workout input {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #69B578; /* Vibrant green border */
+}
+
+#workout input:focus {
+  border-color: #69B578; /* Vibrant green focus border */
+  outline: none;
+}
+
+#workout button {
+  margin-top: 1rem;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #69B578; /* Vibrant green button */
+  color: #181D27; /* Dark navy text */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+select {
+  width: 100%; /* Makes the dropdown 50% of its container's width */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #69B578;
+  border-radius: 5px;
+}
+
+#workout button:hover {
+  background-color: #254D32; /* Deep green on hover */
+}
+
+#workout-form > div {
+  display: inline-flex; /* Set flex display for horizontal alignment */
+  gap: 15px; /* Add spacing between sets */
+  justify-content: space-between; /* Distribute sets evenly */
+  width: 100%;
+  align-items: flex-start; /* Align items at the top */
+  flex-wrap: wrap; /* Ensure responsive behavior on small screens */
+}
+
+/* Individual sets */
+#set1, #set2, #set3 {
+  border: 1px solid #69B578; /* Vibrant green border */
+  padding: 20px; /* Adjusted padding for better spacing */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #3A7D44; /* Muted green background */
+  color: #D0DB97; /* Light olive text */
+  flex: 1 1 calc(30% - 15px); /* Flex-grow:1, min-width: calc(30% - gap), flexible on small screens */
+  box-sizing: border-box; /* Ensure padding/border fits inside width */
+  min-width: 250px; /* Ensures sets don't shrink too small */
+  max-width: 33.33%; /* Caps the width for proper alignment */
+}
+
+/* Inputs inside each set */
+#set1 input, #set2 input, #set3 input {
+  width: 100%; /* Ensure inputs take full width of their container */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #69B578; /* Vibrant green border */
+  border-radius: 5px;
+  margin-top: 5px; /* Add spacing between inputs */
+  box-sizing: border-box;
+}
+
+/* Adjust date picker style to match */
+input[type="date"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #69B578; /* Vibrant green border */
+  border-radius: 5px;
+}
+
+/* Ensure the form doesn't overflow */
+#workout-form {
+  overflow: hidden; /* Prevent content from spilling */
+}
+
+/* Nutrition Tracker Section */
+#nutrition {
+  background-image: url('/img/nutrition.jpg');  /* Replace with your image path */
+  background-size: cover;  /* Ensures the image covers the whole section */
+  background-position: center;  /* Centers the image */
+  background-color: #3A7D44; /* Muted green background */
+  margin: 2rem;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#nutrition form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+#nutrition label {
+  margin-top: 1rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  background-color: #0d3212;
+  color: #D0DB97; /* Light olive text */
+}
+
+#nutrition input {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #69B578; /* Vibrant green border */
+}
+
+#nutrition input:focus {
+  border-color: #69B578; /* Vibrant green focus border */
+  outline: none;
+}
+
+#nutrition button {
+  margin-top: 1rem;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #69B578; /* Vibrant green button */
+  color: #181D27; /* Dark navy text */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#nutrition button:hover {
+  background-color: #254D32; /* Deep green on hover */
+}
+
+#nutrition-summary {
+  margin: 2rem auto;
+  text-align: center;
+  font-size: 1.2rem;
+  background-color: #254D32; /* Deep green background */
+  padding: 1rem;
+  border: 1px solid #69B578; /* Vibrant green border */
+  border-radius: 4px;
+  color: #D0DB97; /* Light olive text */
+}
+
+#meal-list {
+  margin-top: 2rem;
+  max-width: 600px;
+  margin: auto;
+  background-color: #3A7D44; /* Muted green background */
+  padding: 1rem;
+  border: 1px solid #69B578; /* Vibrant green border */
+  border-radius: 4px;
+  color: #D0DB97; /* Light olive text */
+}
+
+#meal-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+#meal-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #69B578; /* Vibrant green border */
+}
+
+#meal-list li:last-child {
+  border-bottom: none;
+}
+
+/* Delete Meal Button */
+.delete-meal-button {
+  background-color: #DC3545; /* Red for delete buttons */
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-meal-button:hover {
+  background-color: #C82333; /* Darker red on hover */
+}
+
+#progress {
+  margin: 2rem auto;  /* Center align the entire section */
+  background-color: #181D27;  /* Dark shade for the section background */
+  padding: 1rem;  /* Padding inside the section to ensure the content doesn't touch the edges */
+  border-radius: 8px;  /* Rounded corners */
+  max-width: 90%;  /* Ensure the section is not too wide on large screens */
+  box-sizing: border-box;  /* Include padding in width calculations */
+}
+
+#progress form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+#progress label {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #D0DB97;  /* Light olive text for the labels */
+}
+
+#progress input {
+  margin-top: 0.5rem;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #69B578;  /* Vibrant green border */
+  background-color: #3A7D44;  /* Muted green background */
+  color: #D0DB97;  /* Light olive text */
+}
+
+#progress input:focus {
+  border-color: #69B578;  /* Vibrant green focus border */
+  outline: none;
+}
+
+#progress button {
+  margin-top: 1rem;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #69B578;  /* Vibrant green background */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#progress button:hover {
+  background-color: #254D32;  /* Darker green on hover */
+}
+
+#progress-log {
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+#progress-log table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #181D27;  /* Dark background for the table */
+}
+
+#progress-log th,
+#progress-log td {
+  border: 1px solid #69B578;  /* Vibrant green border */
+  padding: 0.8rem;
+  text-align: center;
+  color: #D0DB97;  /* Light olive text */
+}
+
+#progress-log th {
+  background-color: #254D32;  /* Darker green background for headers */
+}
+
+.delete-progress-button {
+  background-color: #DC3545;  /* Red for delete buttons */
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-progress-button:hover {
+  background-color: #C82333;  /* Darker red on hover */
+}
+
+/* Progress Chart */
+#progress-chart {
+  width: 100%;
+  max-width: 800px;  /* Maximum width for the chart */
+  height: 400px;    /* Fixed height */
+  margin: 1 1;   /* Center align the chart */
+  padding: 1px;
+  background-color: #ffffff;  /* Darker green background for the chart */
+  border-radius: 8px;
+}
+
+/* #progress-chart canvas {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  /* object-fit: contain;  Ensure the canvas scales inside the container without overflowing */
+  /* display: block;  Prevent extra space around the canvas */
+
+
+

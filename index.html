@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
+  <title>TrackFit</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>TrackFit</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#workout">Workout</a></li>
+        <li><a href="#nutrition">Nutrition</a></li>
+        <li><a href="#progress">Progress</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Home Section -->
+    <section id="home">
+      <h2>Welcome to TrackFit</h2>
+      <p>Track your workouts, nutrition, and progress efficiently!</p>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile">
+      <h2>Profile</h2>
+      <form id="profile-form">
+        <label for="name">Name:</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          placeholder="Enter your name" 
+          required
+        >
+
+        <label for="age">Age:</label>
+        <input 
+          type="number" 
+          id="age" 
+          name="age" 
+          placeholder="Enter your age" 
+          min="0" 
+          required
+        >
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="weight">Weight (kg):</label>
+        <input 
+          type="number" 
+          id="weight" 
+          name="weight" 
+          placeholder="Enter your weight" 
+          min="0" 
+          required
+        >
+
+        <label for="goal">Fitness Goal:</label>
+        <textarea 
+          id="goal" 
+          name="goal" 
+          placeholder="Describe your fitness goal" 
+          rows="4"
+        ></textarea>
+
+        <button type="submit">Save Profile</button>
+      </form>
+
+      <div id="profile-display" class="hidden">
+        <h3>Your Profile</h3>
+        <p><strong>Name:</strong> <span id="display-name"></span></p>
+        <p><strong>Age:</strong> <span id="display-age"></span></p>
+        <p><strong>Gender:</strong> <span id="display-gender"></span></p>
+        <p><strong>Weight:</strong> <span id="display-weight"></span> kg</p>
+        <p><strong>Goal:</strong> <span id="display-goal"></span></p>
+        <button id="edit-profile">Edit Profile</button>
+      </div>
+    </section>
+
+    
+    <!-- Workout Tracker Section -->
+    <div id="workout">
+      <h2>Track Your Workout</h2>
+
+      <!-- Exercise Categories -->
+      <form id="workout-form">
+        <label for="exercise-category">Choose a category:</label>
+        <select id="exercise-category">
+          <option value="Select">Select</option>
+          <option value="Legs">Legs</option>
+          <option value="Shoulders">Shoulders</option>
+          <option value="Biceps">Biceps</option>
+          <option value="Triceps">Triceps</option>
+          <option value="Back">Back</option>
+          <option value="Chest">Chest</option>
+          <option value="Stretches">Stretches</option>
+        </select>
+
+        <!-- Exercise Options will be populated dynamically based on category -->
+        <label for="exercise">Choose an exercise:</label>
+        <select id="exercise"></select>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="reps">Sets and Reps</label>
+        <div>
+          <div id="set1">
+            <h3>Set-1</h3>
+            <label for="weight1">Weight (lbs):</label>
+            <input type="number" id="weight1" name="weight1" required>
+            
+            <label for="reps1">Reps:</label>
+            <input type="number" id="reps1" name="reps1" required>
+          </div>
+      
+          <div id="set2">
+              <h3>Set-2</h3>
+              <label for="weight2">Weight (lbs):</label>
+              <input type="number" id="weight2" name="weight2" required>
+              
+              <label for="reps2">Reps:</label>
+              <input type="number" id="reps2" name="reps2" required>
+          </div>
+      
+          <div id="set3">
+              <h3>Set-3</h3>
+              <label for="weight3">Weight (lbs):</label>
+              <input type="number" id="weight3" name="weight3" required>
+              
+              <label for="reps3">Reps:</label>
+              <input type="number" id="reps3" name="reps3" required>
+          </div>
+        </div>
+        
+        
+        <!--Add buttons to initiate auth sequence and sign out-->
+        <button type="submit" onclick="updateSheet()">Submit Workout Data</button>
+        <button id="authorize_button" onclick="handleAuthClick()">Authorize to save data</button>
+        <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+        
+
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!START OF SCRIPT!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <script type="text/javascript">
+          /* exported gapiLoaded */
+          /* exported gisLoaded */
+          /* exported handleAuthClick */
+          /* exported handleSignoutClick */
+
+          // TODO(developer): Set to client ID and API key from the Developer Console
+          const CLIENT_ID = 'CLIENT_ID';
+          const API_KEY = 'API_KEY';
+          const SHEET_ID = 'SHEET_ID';
+
+          // Discovery doc URL for APIs used by the quickstart
+          const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
+
+          // Authorization scopes required by the API; multiple scopes can be
+          // included, separated by spaces.
+          // const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+          const SCOPES = 'https://www.googleapis.com/auth/spreadsheets'; 
+
+          let tokenClient;
+          let gapiInited = false;
+          let gisInited = false;
+
+          document.getElementById('authorize_button').style.visibility = 'hidden';
+          document.getElementById('signout_button').style.visibility = 'hidden';
+
+          /**
+           * Callback after api.js is loaded.
+           */
+          function gapiLoaded() {
+            gapi.load('client', initializeGapiClient);
+          }
+
+          /**
+           * Callback after the API client is loaded. Loads the
+           * discovery doc to initialize the API.
+           */
+          async function initializeGapiClient() {
+            await gapi.client.init({
+              apiKey: API_KEY,
+              discoveryDocs: [DISCOVERY_DOC],
+            });
+            gapiInited = true;
+            maybeEnableButtons();
+          }
+
+          /**
+           * Callback after Google Identity Services are loaded.
+           */
+          function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+              client_id: CLIENT_ID,
+              scope: SCOPES,
+              callback: '', // defined later
+            });
+            gisInited = true;
+            maybeEnableButtons();
+          }
+
+          /**
+           * Enables user interaction after all libraries are loaded.
+           */
+          function maybeEnableButtons() {
+            if (gapiInited && gisInited) {
+              document.getElementById('authorize_button').style.visibility = 'visible';
+            }
+          }
+
+          /**
+           *  Sign in the user upon button click.
+           */
+          function handleAuthClick() {
+            tokenClient.callback = async (resp) => {
+              if (resp.error !== undefined) {
+                throw (resp);
+              }
+              document.getElementById('signout_button').style.visibility = 'visible';
+              document.getElementById('authorize_button').innerText = 'Refresh';
+            };
+
+            if (gapi.client.getToken() === null) {
+              // Prompt the user to select a Google Account and ask for consent to share their data
+              // when establishing a new session.
+              tokenClient.requestAccessToken({prompt: 'consent'});
+            } else {
+              // Skip display of account chooser and consent dialog for an existing session.
+              tokenClient.requestAccessToken({prompt: ''});
+            }
+          }
+
+          /**
+           *  Sign out the user upon button click.
+           */
+          function handleSignoutClick() {
+            const token = gapi.client.getToken();
+            if (token !== null) {
+              google.accounts.oauth2.revoke(token.access_token);
+              gapi.client.setToken('');
+              document.getElementById('content').innerText = '';
+              document.getElementById('authorize_button').innerText = 'Authorize';
+              document.getElementById('signout_button').style.visibility = 'hidden';
+            }
+          }
+          
+          // Function to update sheet with the current workout information
+          async function updateSheet() {
+            let response;
+            event.preventDefault(); // Prevent form from submitting
+
+            // Get values from the form fields
+            const exerciseCategory = document.getElementById('exercise-category').value;
+            const exercise = document.getElementById('exercise').value; // Assuming this will be populated dynamically
+            const date = document.getElementById('date').value;
+            const sets = [
+            [document.getElementById("weight1").value, document.getElementById("reps1").value],
+            [document.getElementById("weight2").value, document.getElementById("reps2").value],
+            [document.getElementById("weight3").value, document.getElementById("reps3").value],];
+
+            if (!exerciseCategory || !exercise || !date) {
+              alert("Please fill out all required fields.");
+              return;
+            }
+
+            // Log the values to the console 
+            console.log("Date: " + date);
+            console.log("Exercise Category: " + exerciseCategory);
+            console.log("Exercise: " + exercise);
+            try {
+              console.log('Started to update Data');
+              
+              const updateData = [[date, exerciseCategory, exercise, sets[0][0],sets[0][1],sets[1][0],sets[1][1],sets[2][0],sets[2][1]]];
+
+              // Now, append the sample data to the spreadsheet
+              const appendResponse = await gapi.client.sheets.spreadsheets.values.append({
+                spreadsheetId: SHEET_ID,
+                range: 'A2:H', // The range where data will be added
+                valueInputOption: 'RAW', // You can also use 'USER_ENTERED' for formulas
+                resource: {
+                  values: updateData
+                }
+              });
+              
+              console.log('Sample data added:', appendResponse);
+            } catch (err) {
+              console.log(err);
+              document.getElementById('content').innerText = err.message;
+              return;
+            }
+          }
+        </script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+        <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>    
+      </form>
+    </div>
+
+    
+    <section id="nutrition">
+      <h2>Nutrition Tracker</h2>
+      <form id="nutrition-form">
+        <label for="meal">Meal Name:</label>
+        <input type="text" id="meal" name="meal" placeholder="Enter meal name" required>
+    
+        <label for="calories">Calories:</label>
+        <input type="number" id="calories" name="calories" placeholder="Enter calories" min="0" required>
+    
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+    
+        <button type="submit">Add Meal</button>
+      </form>
+    
+      <div id="nutrition-summary">
+        <h3>Daily Summary</h3>
+        <p>Total Calories: <span id="total-calories">0</span></p>
+      </div>
+    
+      <div id="meal-list">
+        <h3>Logged Meals</h3>
+        <ul id="meal-entries"></ul>
+      </div>
+    </section>
+    
+    <section id="progress">
+      <h2>Progress Tracker</h2>
+      <form id="progress-form">
+        <label for="progress-weight">Weight (kg):</label>
+        <input type="number" id="progress-weight" name="weight" placeholder="Enter weight" min="0" required>
+    
+        <label for="body-fat">Body Fat %:</label>
+        <input type="number" id="body-fat" name="bodyFat" placeholder="Enter body fat percentage" min="0" max="100" required>
+    
+        <label for="progress-date">Date:</label>
+        <input type="date" id="progress-date" name="date" required>
+    
+        <button type="submit">Log Progress</button>
+      </form>
+    
+      <div id="progress-log">
+        <h3>Logged Progress</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Weight (kg)</th>
+              <th>Body Fat %</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="progress-entries"></tbody>
+        </table>
+      </div>
+      <h3>Progress Chart</h3>
+      <div id="progress-chart">
+        <canvas id="progressChart"></canvas>
+      </div>
+    </section>
+    
+  </main>
+  <footer>
+    <p>&copy; 2024 TrackFit. All rights reserved.</p>
+  </footer>
+  <script src="scripts.js"></script>
+</body>
+</html>
