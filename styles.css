@@ -35,7 +35,7 @@ section {
 
 /* Header styling */
 header {
-  background-image: url('/img/bgimage2.jpg');  /* Replace with your image path */
+  background-image: url('https://ibb.co/vc0k9Xp');  /* Replace with your image path */
   background-size: cover;  /* Ensures the image covers the whole section */
   background-position: center;  /* Centers the image */
   background-color: #3A7D44; /* Muted green background for header */
@@ -113,7 +113,7 @@ a:hover {
 
 /* Hero section */
 #home {
-  background-image: url('/img/bgdark.jpg');  /* Replace with your image path */
+  background-image: url('https://ibb.co/KG971fm');  /* Replace with your image path */
   background-size: cover;  /* Ensures the image covers the whole section */
   background-position: center;  /* Centers the image */
   background-color: #254D32; /* Deep green background */
@@ -153,7 +153,7 @@ a:hover {
 
 /* Profile Section */
 #profile {
-  background-image: url('/img/bgdark1.jpg');  /* Replace with your image path */
+  background-image: url('https://ibb.co/5T8WLD5');  /* Replace with your image path */
   background-size: cover;  /* Ensures the image covers the whole section */
   background-position: center;  /* Centers the image */
   background-color: #3A7D44; /* Muted green background */
@@ -233,7 +233,7 @@ a:hover {
 
 /* Workout Tracker Section */
 #workout {
-  background-image: url('/img/dumbells.jpg');  /* Replace with your image path */
+  background-image: url('https://ibb.co/4Kh7vfC');  /* Replace with your image path */
   background-size: cover;  /* Ensures the image covers the whole section */
   background-position: center;  /* Centers the image */
   background-color: #3A7D44; /* Muted green background */
@@ -345,7 +345,7 @@ input[type="date"] {
 
 /* Nutrition Tracker Section */
 #nutrition {
-  background-image: url('/img/nutrition.jpg');  /* Replace with your image path */
+  background-image: url('https://ibb.co/1JKkm7m');  /* Replace with your image path */
   background-size: cover;  /* Ensures the image covers the whole section */
   background-position: center;  /* Centers the image */
   background-color: #3A7D44; /* Muted green background */
